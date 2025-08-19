@@ -11,22 +11,29 @@ import { UserPageComponent } from './pages/user-page/user-page.component';
 import { ClientsTablePageComponent } from './pages/clients-table-page/clients-table-page.component';
 import { ClientFormPageComponent } from './pages/client-form-page/client-form-page.component';
 import { ModalComponent } from '../../shared/modal/modal.component';
+import { ProfessionalFormComponent } from './components/professional-form/professional-form.component';
+import { ProfessionalListComponent } from './components/professional-list/professional-list.component';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @NgModule({
   declarations: [
-    AreaPageComponent,
-    ProfessionalPageComponent,
     AppointmentTypePageComponent,
-    UserPageComponent,
+    AreaPageComponent,
+    ClientFormPageComponent,
     ClientsTablePageComponent,
-    ClientFormPageComponent
+    ProfessionalFormComponent,
+    ProfessionalListComponent,
+    ProfessionalPageComponent,
+    UserPageComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     MaintenanceRoutingModule,
     ReactiveFormsModule,
-    ModalComponent
+    ModalComponent,
+    NgxMaskDirective,
+    NgxMaskPipe
   ]
 })
 export class MaintenanceModule { }
