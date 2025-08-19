@@ -14,13 +14,13 @@
             Cadastros
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Área</a></li>
+            <li><a class="dropdown-item" routerLink="/area">Área</a></li>
             <li><a class="dropdown-item" routerLink="/profissionais">Profissional</a></li>
-            <li><a class="dropdown-item" href="#">Tipo Atendimento</a></li>
+            <li><a class="dropdown-item" routerLink="/appointment-type">Tipo Atendimento</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Cliente</a></li>
+            <li><a class="dropdown-item" id="navItemCliente" routerLink="clients-table">Cliente</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Usuário</a></li>
+            <li><a class="dropdown-item" routerLink="user">Usuário</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -28,16 +28,23 @@
             Agendamentos
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Hoje</a></li>
-            <li><a class="dropdown-item" href="#">Agendar</a></li>
-            <li><a class="dropdown-item" href="#">Cancelar</a></li>
+            <li><a class="dropdown-item" routerLink="today-appointments">Hoje</a></li>
+            <li><a class="dropdown-item" routerLink="create-appointment">Agendar</a></li>
+            <li><a class="dropdown-item" routerLink="cancel-appointment">Cancelar</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Histórico do Cliente</a></li>
+            <li><a class="dropdown-item" routerLink="client-history">Histórico do Cliente</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Agenda do Profissional</a></li>
+            <li><a class="dropdown-item" routerLink="professional-workdays">Agenda do Profissional</a></li>
           </ul>
         </li>
       </ul>
+      <div class="d-flex">
+        <div class="my-auto me-4">
+            <span class="fw-bold me-2">{{getUserName()}}</span>
+            <span *ngIf="isAdmin()">(admin)</span>
+        </div>
+          <button class="btn btn-outline-secondary" type="submit" (click)="logout()">Sair</button>
+      </div>
     </div>
   </div>
 </nav>

@@ -1,7 +1,10 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Professional } from '../models/professional.model';
+import { environment } from '../../../environments/environment';
+import { Time } from '../../modules/schedule/components/time/models/time';
 
 // Paginated interface
 export interface Page<T> {
@@ -33,9 +36,9 @@ export interface ProfessionalRequest {
 })
 export class ProfessionalService {
 
-  private readonly API_URL = 'http://localhost:8080/professionals';
+  baseUrl = environment.baseUrl + "/professionals";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
   getProfissionais(
     page: number,
@@ -51,21 +54,36 @@ export class ProfessionalService {
       params = params.set('name', name);
     }
 
-    return this.http.get<Page<Professional>>(this.API_URL, { params });
+    return this.http.get<Page<Professional>>(this.baseUrl, { params });
   }
 
   // Handle both create and update
   save(data: ProfessionalRequest): Observable<Professional> {
     if (data.id) {
       // If an ID exists, it's an update (PUT)
-      return this.http.put<Professional>(`${this.API_URL}/${data.id}`, data);
+      return this.http.put<Professional>(`${this.baseUrl}/${data.id}`, data);
     } else {
       // If no ID, it's a create (POST)
-      return this.http.post<Professional>(this.API_URL, data);
+      return this.http.post<Professional>(this.baseUrl, data);
     }
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.API_URL}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
+  getAvailableDays(professional: Professional, calendar: Date): Observable<number[]> {
+    let month = calendar.getMonth() + 1;
+    let year = calendar.getFullYear();
+    let url = `${this.baseUrl}/${professional.id}/availability-days?year=${year}&month=${month}`;
+
+    return this.http.get<number[]>(url);
+}
+
+  getAvailableTimes(professional: Professional, selectedDate: Date): Observable<Time[]> {
+    let date = selectedDate;
+    let url = `${this.baseUrl}/${professional.id}/availability-times?date=${this.datePipe.transform(date, 'yyyy-MM-dd')}`;
+
+    return this.http.get<Time[]>(url);
   }
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { ToastComponent } from '../toast/toast.component';
-import { ToastInfo, ToastService } from '../toast.service';
+import { ToastInfo, ToastService } from '../../core/services/toast.service';
 
 @Component({
   selector: 'app-toast-container',

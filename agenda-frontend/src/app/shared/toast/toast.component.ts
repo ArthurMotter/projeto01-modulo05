@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ToastInfo } from '../toast.service';
+import { ToastInfo } from '../../core/services/toast.service';
 
 @Component({
   selector: 'app-toast',

@@ -11,5 +11,15 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  getUserName(): string {
+    return "Marcia Pereira";
+  }
 
+  isAdmin():boolean{
+    return true;
+  }
+
+  logout(){
+    console.log("logout");
+  }
 }
