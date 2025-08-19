@@ -18,5 +18,15 @@ export class NavbarService {
     ];
   }
   
-  // More links here
+  getAgendamentoLinks(): NavLink[] {
+    return [
+      { label: 'Hoje', path: '/agendamentos/hoje' },
+      { label: 'Agendar', path: '/agendamentos/agendar' },
+      { label: 'Cancelar', path: '/agendamentos/cancelar' },
+      { divider: true },
+      { label: 'Histórico do Cliente', path: '/agendamentos/historico-cliente' },
+      { divider: true },
+      { label: 'Agenda do Profissional', path: '/agendamentos/agenda-profissional' },
+    ];
+  }
 }

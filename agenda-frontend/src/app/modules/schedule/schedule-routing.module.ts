@@ -7,11 +7,11 @@ import { ClientHistoryPageComponent } from './pages/client-history-page/client-h
 import { ProfessionalWorkdaysPageComponent } from './pages/professional-workdays-page/professional-workdays-page.component';
 
 const routes: Routes = [
-  {path: 'today-appointments', component: TodayAppointmentsPageComponent},
-  {path: 'create-appointment', component: CreateAppointmentPageComponent},
-  {path: 'cancel-appointment', component: CancelAppointmentPageComponent},
-  {path: 'client-history', component: ClientHistoryPageComponent},
-  {path: 'professional-workdays', component: ProfessionalWorkdaysPageComponent},
+  {path: 'hoje', component: TodayAppointmentsPageComponent},
+  {path: 'agendar', component: CreateAppointmentPageComponent},
+  {path: 'cancelar', component: CancelAppointmentPageComponent},
+  {path: 'historico-cliente', component: ClientHistoryPageComponent},
+  {path: 'agenda-profissional', component: ProfessionalWorkdaysPageComponent},
 ];
 
 @NgModule({

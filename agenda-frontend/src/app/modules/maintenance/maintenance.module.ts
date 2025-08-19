@@ -10,10 +10,11 @@ import { AppointmentTypePageComponent } from './pages/appointment-type-page/appo
 import { UserPageComponent } from './pages/user-page/user-page.component';
 import { ClientsTablePageComponent } from './pages/clients-table-page/clients-table-page.component';
 import { ClientFormPageComponent } from './pages/client-form-page/client-form-page.component';
-import { ModalComponent } from '../../shared/modal/modal.component';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { ProfessionalFormComponent } from './components/professional-form/professional-form.component';
 import { ProfessionalListComponent } from './components/professional-list/professional-list.component';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
     FormsModule,
     MaintenanceRoutingModule,
     ReactiveFormsModule,
-    ModalComponent,
+    SharedModule,
     NgxMaskDirective,
     NgxMaskPipe
   ]

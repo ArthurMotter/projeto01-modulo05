@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe, JsonPipe } from '@angular/common';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { ScheduleRoutingModule } from './schedule-routing.module';
 import { TodayAppointmentsPageComponent } from './pages/today-appointments-page/today-appointments-page.component';
 import { CreateAppointmentPageComponent } from './pages/create-appointment-page/create-appointment-page.component';
@@ -13,8 +11,7 @@ import { FormCreateAppointmentComponent } from './components/form-create-appoint
 import { ReactiveFormsModule } from '@angular/forms';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { TimeComponent } from './components/time/time.component';
-import { SharedModule } from 'src/app/shared/shared.module';
-
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +28,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     ScheduleRoutingModule,
     ReactiveFormsModule,
-    NgbModule,
     SharedModule
   ],
   providers: [

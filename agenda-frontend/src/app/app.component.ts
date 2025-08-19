@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { ToastContainerComponent } from './shared/toast-container/toast-container.component';
+import { SharedModule } from './shared/shared.module';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
-    NavbarComponent,
-    ToastContainerComponent
+    SharedModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

@@ -28,21 +28,18 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
             Agendamentos
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="today-appointments">Hoje</a></li>
-            <li><a class="dropdown-item" routerLink="create-appointment">Agendar</a></li>
-            <li><a class="dropdown-item" routerLink="cancel-appointment">Cancelar</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" routerLink="client-history">Histórico do Cliente</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" routerLink="professional-workdays">Agenda do Profissional</a></li>
+            <ng-container *ngFor="let link of agendamentoLinks">
+              <li *ngIf="link.divider">
+                <hr class="dropdown-divider">
+              </li>
+              <li *ngIf="!link.divider">
+                <a class="dropdown-item" [routerLink]="link.path">{{ link.label }}</a>
+              </li>
+            </ng-container>
           </ul>
         </li>
       </ul>

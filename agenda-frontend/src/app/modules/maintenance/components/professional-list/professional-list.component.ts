@@ -4,7 +4,7 @@ import { Area } from '../../../../core/models/area.model';
 import { Professional } from '../../../../core/models/professional.model';
 import { Page, ProfessionalService } from '../../../../core/services/professional.service';
 import { ToastService } from '../../../../core/services/toast.service';
-import { ModalComponent } from '../../../../shared/modal/modal.component';
+import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-professional-list',

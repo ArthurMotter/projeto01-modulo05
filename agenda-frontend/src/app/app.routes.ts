@@ -15,5 +15,9 @@ export const routes: Routes = [
     {
         path: 'cadastros',
         loadChildren: () => import('./modules/maintenance/maintenance.module').then(m => m.MaintenanceModule)
+    },
+    {
+        path: 'agendamentos',
+        loadChildren: () => import('./modules/schedule/schedule.module').then(m => m.ScheduleModule)
     }
 ];

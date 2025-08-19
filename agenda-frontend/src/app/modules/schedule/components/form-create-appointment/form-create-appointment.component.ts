@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OperatorFunction } from 'rxjs';
-import { AppointmentType } from 'src/app/core/models/appointment-type';
-import { Area } from 'src/app/core/models/area';
-import { Client } from 'src/app/core/models/client';
-import { Professional } from 'src/app/core/models/professional';
+import { AppointmentType } from '../../../../core/models/appointment.models';
+import { Area } from '../../../../core/models/area.model';
+import { Client } from '../../../../core/models/client.model';
+import { Professional } from '../../../../core/models/professional.model';
 
 @Component({
   selector: 'app-form-create-appointment',
+  standalone: false,
   templateUrl: './form-create-appointment.component.html',
   styleUrls: ['./form-create-appointment.component.css']
 })
@@ -35,27 +36,26 @@ export class FormCreateAppointmentComponent {
 
   appointmentForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder){
+  constructor(private formBuilder: FormBuilder) {
     this.appointmentForm = this.formBuilder.group({
-        area: ['', Validators.required],
-        professional: [{value: '', disabled: true}, Validators.required],
-        type: ['',Validators.required],
-        client: ['', Validators.required],
-        comments: ['']
+      area: ['', Validators.required],
+      professional: [{ value: '', disabled: true }, Validators.required],
+      type: ['', Validators.required],
+      client: ['', Validators.required],
+      comments: ['']
     });
-
 
   }
 
   //Used by typeahead component
   formatter = (client: Client) => client.name;
 
-  onAreaChanged(){
+  onAreaChanged() {
     this.selectedAreaEvent.emit(this.appointmentForm.value["area"]);
     this.appointmentForm.controls["professional"].enable();
   }
 
-  onProfessionalChanged(){
+  onProfessionalChanged() {
     this.selectedProfessionalEvent.emit(this.appointmentForm.value["professional"]);
   }
 
@@ -63,7 +63,7 @@ export class FormCreateAppointmentComponent {
     return this.appointmentForm.controls["client"].value;
   }
 
-  cleanForm(){
+  cleanForm() {
     this.appointmentForm.reset();
     this.submitted = false;
   }

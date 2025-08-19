@@ -2,22 +2,21 @@ import { JsonPipe } from '@angular/common';
 import { FormCreateAppointmentComponent } from './../../components/form-create-appointment/form-create-appointment.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable, debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs';
-import { AppointmentType } from 'src/app/core/models/appointment-type';
-import { Area } from 'src/app/core/models/area';
-import { Client } from 'src/app/core/models/client';
-import { Professional } from 'src/app/core/models/professional';
-import { AppointmentTypeService } from 'src/app/core/services/appointment-type.service';
-import { AreaService } from 'src/app/core/services/area.service';
-import { ClientService } from 'src/app/core/services/client.service';
-import { ProfessionalService } from 'src/app/core/services/professional.service';
+import { AppointmentType, Appointment } from '../../../../core/models/appointment.models';
+import { Area } from '../../../../core/models/area.model';
+import { Client } from '../../../../core/models/client.model';
+import { Professional } from '../../../../core/models/professional.model';
+import { AppointmentService } from '../../../../core/services/appointment.service';
+import { AreaService } from '../../../../core/services/area.service';
+import { ClientService } from '../../../../core/services/client.service';
+import { ProfessionalService } from '../../../../core/services/professional.service';
+import { ToastService } from '../../../../core/services/toast.service';
+import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 import { Time } from '../../components/time/models/time';
-import { Appointment } from 'src/app/core/models/appointment';
-import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
-import { AppointmentService } from 'src/app/core/services/appointment.service';
-import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-create-appointment-page',
+  standalone: false,
   templateUrl: './create-appointment-page.component.html',
   styleUrls: ['./create-appointment-page.component.css']
 })
@@ -44,7 +43,6 @@ export class CreateAppointmentPageComponent implements OnInit {
   private formCreateAppointmentComponent !: FormCreateAppointmentComponent;
 
   constructor(private areaService: AreaService,
-    private appointmentTypeService: AppointmentTypeService,
     private clientService: ClientService,
     private professionalService: ProfessionalService,
     private appointmentService: AppointmentService,
@@ -100,13 +98,13 @@ export class CreateAppointmentPageComponent implements OnInit {
       distinctUntilChanged(),
       filter(term => term.length >= 2),
       switchMap(term => this.clientService.getClientsWithNameContaining(term)),
-      map( page => page.content || [])
+      map(page => page.content || [])
     );
   }
 
 
   loadAppointmentTypes() {
-    this.appointmentTypeService.getAppointmentTypes().subscribe(
+    this.appointmentService.getAppointmentTypes().subscribe(
       {
         next: types => this.appointmentTypes = types
       }
@@ -130,7 +128,7 @@ export class CreateAppointmentPageComponent implements OnInit {
     this.availableTimes = [];
   }
 
-  clean(){
+  clean() {
     this.formCreateAppointmentComponent.cleanForm();
     this.availableTimes = [];
     this.availableDays = [];
@@ -142,20 +140,22 @@ export class CreateAppointmentPageComponent implements OnInit {
     this.checkDateAndTimeErros();
 
     if (this.isAppointmentValid()) {
+      /*
       this.appointment = this.createAppointmentObject();
       modalConfirm.open({ size: "lg" }).then(confirm => {
         if (confirm) {
           this.appointmentService.save(this.appointment).subscribe({
             next: () => {
-                this.toastService.show("Agendamento criado com sucesso!",{classname: "bg-success text-light"});
-                this.clean();
+              this.toastService.showSuccess('Agendamento criado com sucesso!');
+              this.clean();
             },
             error: (e) => {
-              this.toastService.show(e.error.message,{classname: "bg-danger text-light"});
+              this.toastService.showError('Erro ao criar agendamento.');
             }
           });
         }
       });
+      */
     }
   }
 

@@ -4,6 +4,7 @@ import { Time } from './models/time';
 
 @Component({
   selector: 'app-time',
+  standalone: false,
   templateUrl: './time.component.html',
   styleUrls: ['./time.component.css']
 })
@@ -33,7 +34,6 @@ export class TimeComponent implements OnInit, OnChanges{
       }
     }
   }
-
 
   resetTimes() {
     this.times = [

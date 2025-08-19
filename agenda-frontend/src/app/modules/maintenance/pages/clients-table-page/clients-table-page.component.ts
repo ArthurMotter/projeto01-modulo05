@@ -3,7 +3,7 @@ import { ClientService } from '../../../../core/services/client.service';
 import { ToastService } from '../../../../core/services/toast.service';
 import { Page } from '../../../../core/models/page.model';
 import { Client } from '../../../../core/models/client.model';
-import { ModalComponent } from '../../../../shared/modal/modal.component';
+import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-clients-table-page',

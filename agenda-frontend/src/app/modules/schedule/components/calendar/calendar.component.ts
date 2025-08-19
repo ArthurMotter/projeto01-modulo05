@@ -3,19 +3,20 @@ import { Day } from './models/day';
 
 @Component({
   selector: 'app-calendar',
+  standalone: false,
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit, OnChanges {
 
   @Input()
-  calendarMonth : Date = new Date();
+  calendarMonth: Date = new Date();
 
   @Input()
-  availableDays : number[] = [];
+  availableDays: number[] = [];
 
   @Input()
-  error: string ="";
+  error: string = "";
 
   @Output()
   changedMonthEvent = new EventEmitter<Date>();
@@ -32,33 +33,33 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.hasOwnProperty("availableDays")){
+    if (changes.hasOwnProperty("availableDays")) {
       this.selectedDay = 0;
       this.loadCalendar();
     }
   }
 
-  onSelectedDay(day: number){
+  onSelectedDay(day: number) {
     this.selectedDay = day;
     this.selectedDateEvent.emit(new Date(this.calendarMonth.getFullYear(), this.calendarMonth.getMonth(), this.selectedDay));
   }
 
-  loadCalendar(){
+  loadCalendar() {
     this.days = [
-                 ... this.getBlankInitalDays(this.calendarMonth.getFullYear(), this.calendarMonth.getMonth()),
-                 ... this.getDaysInMonth(this.calendarMonth.getFullYear(), this.calendarMonth.getMonth()),
-                ];
+      ... this.getBlankInitalDays(this.calendarMonth.getFullYear(), this.calendarMonth.getMonth()),
+      ... this.getDaysInMonth(this.calendarMonth.getFullYear(), this.calendarMonth.getMonth()),
+    ];
 
-    this.days = [ ... this.days,
-                  ... this.getBlankEndDays(this.calendarMonth.getFullYear(), this.calendarMonth.getMonth(), this.days.length),
-                ];
+    this.days = [... this.days,
+    ... this.getBlankEndDays(this.calendarMonth.getFullYear(), this.calendarMonth.getMonth(), this.days.length),
+    ];
   }
 
   getBlankEndDays(year: number, month: number, length: number) {
     let rest = 7 - length % 7;
     let days: Day[] = [];
 
-    for(let i=0; i < rest; i++){
+    for (let i = 0; i < rest; i++) {
       days.push({} as Day)
     }
 
@@ -73,18 +74,18 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   getBlankInitalDays(year: number, month: number): Day[] {
     let firstDay = this.getFirstDayInMonth(year, month);
-    let emptyDays:number =0;
+    let emptyDays: number = 0;
     let dayWeek = firstDay.getDay();
     let days: Day[] = [];
 
-    if(dayWeek == 0){
+    if (dayWeek == 0) {
       emptyDays = 6;
     }
-    else{
-      emptyDays = dayWeek -1;
+    else {
+      emptyDays = dayWeek - 1;
     }
 
-    for(let i=0; i < emptyDays; i++){
+    for (let i = 0; i < emptyDays; i++) {
       days.push({} as Day)
     }
 
@@ -96,14 +97,14 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   getDaysInMonth(year: number, month: number): Day[] {
-    let numberOfDays : number = this.getNumberOfDays(year, month);
+    let numberOfDays: number = this.getNumberOfDays(year, month);
     let days: Day[] = [];
 
-    for(let i=1; i<= numberOfDays; i++){
-      if(this.availableDays.includes(i)){
-        days.push({day:i, available: true});
-      }else{
-        days.push({day:i, available: false});
+    for (let i = 1; i <= numberOfDays; i++) {
+      if (this.availableDays.includes(i)) {
+        days.push({ day: i, available: true });
+      } else {
+        days.push({ day: i, available: false });
       }
 
     }
@@ -112,39 +113,39 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   getNumberOfDays(year: number, month: number): number {
-      return new Date(year,month+1,0).getDate();
+    return new Date(year, month + 1, 0).getDate();
   }
 
-  onNextMonth(){
+  onNextMonth() {
     this.availableDays = [];
     this.calendarMonth = new Date(this.calendarMonth);
-    this.calendarMonth.setMonth(this.calendarMonth.getMonth()+1);
+    this.calendarMonth.setMonth(this.calendarMonth.getMonth() + 1);
     this.calendarMonth.setDate(1);
     this.loadCalendar();
     this.changedMonthEvent.emit(new Date(this.calendarMonth));
     this.selectedDay = 0;
   }
 
-  onPreviousMonth(){
+  onPreviousMonth() {
     this.availableDays = [];
     let previousDate = new Date(this.calendarMonth);
-    previousDate.setMonth(this.calendarMonth.getMonth()-1);
+    previousDate.setMonth(this.calendarMonth.getMonth() - 1);
     previousDate.setDate(1);
 
-    if(this.isDateInFuture(previousDate)){
+    if (this.isDateInFuture(previousDate)) {
       this.calendarMonth = previousDate;
-    }else{
-        if(this.isDateInCurrentMonthYear(previousDate)){
-          previousDate.setDate(new Date().getDate());
-          this.calendarMonth = previousDate;
-        }
+    } else {
+      if (this.isDateInCurrentMonthYear(previousDate)) {
+        previousDate.setDate(new Date().getDate());
+        this.calendarMonth = previousDate;
+      }
     }
     this.loadCalendar();
     this.changedMonthEvent.emit(new Date(this.calendarMonth));
     this.selectedDay = 0;
   }
 
-  showPreviousMonth(): boolean{
+  showPreviousMonth(): boolean {
     return !this.isDateInCurrentMonthYear(this.calendarMonth);
   }
 

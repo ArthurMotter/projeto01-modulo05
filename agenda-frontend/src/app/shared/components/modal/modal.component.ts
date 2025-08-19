@@ -1,12 +1,10 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-modal',
-  standalone: true,
-  imports: [CommonModule],
+  standalone: false,
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
