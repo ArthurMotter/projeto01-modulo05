@@ -3,8 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Professional } from '../models/professional.model';
-import { environment } from '../../../environments/environment';
 import { Time } from '../../modules/schedule/components/time/models/time';
+import { environment } from '../../../environments/environment.development';
 
 // Paginated interface
 export interface Page<T> {

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Appointment } from '../models/appointment.models';
 import { AppointmentType } from '../models/appointment.models';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'

@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Area } from '../../models/area.model';
-import { Professional } from '../../models/professional.model';
-import { AreaService } from '../../services/area.service';
-import { ProfessionalService } from '../../services/professional.service';
-import { ToastService } from '../../../shared/toast.service';
+import { Area } from '../../../../core/models/area.model';
+import { Professional } from '../../../../core/models/professional.model';
+import { AreaService } from '../../../../core/services/area.service';
+import { ProfessionalService } from '../../../../core/services/professional.service';
+import { ToastService } from '../../../../core/services/toast.service';
 
 @Component({
   selector: 'app-professional-form',

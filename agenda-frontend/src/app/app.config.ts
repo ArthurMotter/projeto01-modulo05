@@ -4,12 +4,14 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideNgxMask } from 'ngx-mask';
 
 import { routes } from './app.routes';
+import { DatePipe } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
-    provideNgxMask()
+    provideNgxMask(),
+    DatePipe 
   ]
 };

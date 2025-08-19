@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Professional } from '../../models/professional.model';
-import { Page, ProfessionalService } from '../../services/professional.service';
-import { Area } from '../../models/area.model';
-import { ModalComponent } from '../../../layout/modal/modal.component';
-import { ToastService } from '../../../shared/toast.service';
 import { ProfessionalFormComponent } from '../professional-form/professional-form.component';
+import { Area } from '../../../../core/models/area.model';
+import { Professional } from '../../../../core/models/professional.model';
+import { Page, ProfessionalService } from '../../../../core/services/professional.service';
+import { ToastService } from '../../../../core/services/toast.service';
+import { ModalComponent } from '../../../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-professional-list',

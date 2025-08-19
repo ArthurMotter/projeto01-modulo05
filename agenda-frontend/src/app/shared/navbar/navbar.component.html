@@ -5,10 +5,12 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
+      
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="/">Home</a>
         </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
             Cadastros
@@ -23,6 +25,7 @@
             <li><a class="dropdown-item" routerLink="user">Usuário</a></li>
           </ul>
         </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
             Agendamentos
@@ -38,13 +41,15 @@
           </ul>
         </li>
       </ul>
-      <div class="d-flex">
-        <div class="my-auto me-4">
-            <span class="fw-bold me-2">{{getUserName()}}</span>
-            <span *ngIf="isAdmin()">(admin)</span>
+
+      <div class="d-flex align-items-center">
+        <div class="navbar-text me-3">
+            <span class="fw-bold">{{getUserName()}}</span>
+            <span *ngIf="isAdmin()"> (admin)</span>
         </div>
-          <button class="btn btn-outline-secondary" type="submit" (click)="logout()">Sair</button>
+          <button class="btn btn-outline-secondary" type="button" (click)="logout()">Sair</button>
       </div>
+
     </div>
   </div>
 </nav>
