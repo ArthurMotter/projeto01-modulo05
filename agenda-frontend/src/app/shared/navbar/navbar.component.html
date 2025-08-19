@@ -5,7 +5,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      
+
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="/">Home</a>
@@ -16,27 +16,32 @@
             Cadastros
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="/area">Área</a></li>
-            <li><a class="dropdown-item" routerLink="/profissionais">Profissional</a></li>
-            <li><a class="dropdown-item" routerLink="/appointment-type">Tipo Atendimento</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" id="navItemCliente" routerLink="clients-table">Cliente</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" routerLink="user">Usuário</a></li>
+            <ng-container *ngFor="let link of cadastroLinks">
+              <li *ngIf="link.divider">
+                <hr class="dropdown-divider">
+              </li>
+              <li *ngIf="!link.divider">
+                <a class="dropdown-item" [routerLink]="link.path">{{ link.label }}</a>
+              </li>
+            </ng-container>
           </ul>
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
             Agendamentos
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" routerLink="today-appointments">Hoje</a></li>
             <li><a class="dropdown-item" routerLink="create-appointment">Agendar</a></li>
             <li><a class="dropdown-item" routerLink="cancel-appointment">Cancelar</a></li>
-            <li><hr class="dropdown-divider"></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
             <li><a class="dropdown-item" routerLink="client-history">Histórico do Cliente</a></li>
-            <li><hr class="dropdown-divider"></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
             <li><a class="dropdown-item" routerLink="professional-workdays">Agenda do Profissional</a></li>
           </ul>
         </li>
@@ -44,10 +49,10 @@
 
       <div class="d-flex align-items-center">
         <div class="navbar-text me-3">
-            <span class="fw-bold">{{getUserName()}}</span>
-            <span *ngIf="isAdmin()"> (admin)</span>
+          <span class="fw-bold">{{getUserName()}}</span>
+          <span *ngIf="isAdmin()"> (admin)</span>
         </div>
-          <button class="btn btn-outline-secondary" type="button" (click)="logout()">Sair</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="logout()">Sair</button>
       </div>
 
     </div>

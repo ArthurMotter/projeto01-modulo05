@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from 'src/app/core/models/client';
-import { Page } from 'src/app/core/models/page';
-import { ClientService } from 'src/app/core/services/client.service';
-import { ToastService } from 'src/app/core/services/toast.service';
-import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+import { ClientService } from '../../../../core/services/client.service';
+import { ToastService } from '../../../../core/services/toast.service';
+import { Page } from '../../../../core/models/page.model';
+import { Client } from '../../../../core/models/client.model';
+import { ModalComponent } from '../../../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-clients-table-page',
+  standalone: false,
   templateUrl: './clients-table-page.component.html',
   styleUrls: ['./clients-table-page.component.css']
 })
 export class ClientsTablePageComponent implements OnInit {
 
-  constructor(private clientService: ClientService, private toastService: ToastService){}
+  constructor(private clientService: ClientService, private toastService: ToastService) { }
 
   clientPage: Page<Client> = {} as Page<Client>;
   page = 1;
@@ -28,21 +29,22 @@ export class ClientsTablePageComponent implements OnInit {
 
   loadClients() {
     this.clientService.getClientsPage(this.nameFilter, this.page).subscribe({
-        next: response => {
-            this.clientPage = response;
-        }
+      next: response => {
+        this.clientPage = response;
+      }
     });
   }
 
-  pageChange(){
+  pageChange() {
     this.loadClients();
   }
 
-  filterName(){
+  filterName() {
     this.loadClients();
   }
 
-  delete(client: Client, modalConfirm: ModalComponent){
+  delete(client: Client, modalConfirm: ModalComponent) {
+    /*
     this.selectedClient = client;
     modalConfirm.open().then( confirm => {
       if(confirm){
@@ -58,9 +60,8 @@ export class ClientsTablePageComponent implements OnInit {
       }
     })
 
-
+    */
   }
-
 
 }
 
