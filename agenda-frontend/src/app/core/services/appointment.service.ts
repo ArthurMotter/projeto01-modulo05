@@ -11,8 +11,8 @@ import { environment } from '../../../environments/environment.development';
 export class AppointmentService {
 
   baseUrl = environment.baseUrl;
-  appointmentUrl = this.baseUrl + + "/appointments";
-  appointmentTypesUrl = this.baseUrl + + "/appointment-types";
+  appointmentUrl = this.baseUrl + "/appointments";
+  appointmentTypesUrl = this.baseUrl + "/appointment-types";
 
   constructor(private http: HttpClient) { }
 
