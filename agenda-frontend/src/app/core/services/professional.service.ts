@@ -5,21 +5,7 @@ import { Observable } from 'rxjs';
 import { Professional } from '../models/professional.model';
 import { Time } from '../../modules/schedule/components/time/models/time';
 import { environment } from '../../../environments/environment.development';
-
-// Paginated interface
-export interface Page<T> {
-  content: T[];
-  pageable: any;
-  last: boolean;
-  totalPages: number;
-  totalElements: number;
-  size: number;
-  number: number;
-  sort: any;
-  first: boolean;
-  numberOfElements: number;
-  empty: boolean;
-}
+import { Page } from '../models/page.model';
 
 // --- backend DTO ---
 export interface ProfessionalRequest {
@@ -36,7 +22,7 @@ export interface ProfessionalRequest {
 })
 export class ProfessionalService {
 
-  baseUrl = environment.baseUrl + "/professionals";
+  baseUrl = `${environment.baseUrl}/professionals`;
 
   constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
@@ -48,7 +34,8 @@ export class ProfessionalService {
 
     let params = new HttpParams()
       .set('page', page.toString())
-      .set('size', size.toString());
+      .set('size', size.toString())
+      .set('sort', 'name,asc'); 
 
     if (name) {
       params = params.set('name', name);
@@ -73,16 +60,16 @@ export class ProfessionalService {
   }
 
   getAvailableDays(professional: Professional, calendar: Date): Observable<number[]> {
-    let month = calendar.getMonth() + 1;
-    let year = calendar.getFullYear();
-    let url = `${this.baseUrl}/${professional.id}/availability-days?year=${year}&month=${month}`;
+    const month = calendar.getMonth() + 1;
+    const year = calendar.getFullYear();
+    const url = `${this.baseUrl}/${professional.id}/availability-days?year=${year}&month=${month}`;
 
     return this.http.get<number[]>(url);
-}
+  }
 
   getAvailableTimes(professional: Professional, selectedDate: Date): Observable<Time[]> {
-    let date = selectedDate;
-    let url = `${this.baseUrl}/${professional.id}/availability-times?date=${this.datePipe.transform(date, 'yyyy-MM-dd')}`;
+    const formattedDate = this.datePipe.transform(selectedDate, 'yyyy-MM-dd');
+    const url = `${this.baseUrl}/${professional.id}/availability-times?date=${formattedDate}`;
 
     return this.http.get<Time[]>(url);
   }
