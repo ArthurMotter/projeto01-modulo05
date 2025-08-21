@@ -6,14 +6,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Entity
-@Table(name = "tb_client")
+@Table(name = "clients")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Client {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
+
+    @Column(nullable = false, length = 150)
     private String name;
+
+    @Column(length = 20)
     private String phone;
-    private String email;
-    
+
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
+
 }
