@@ -18,6 +18,7 @@ export class ClientListComponent implements OnInit {
   @ViewChild('deleteConfirmationModal') deleteConfirmationModal!: ModalComponent;
   @ViewChild(ClientFormComponent) formComponent!: ClientFormComponent;
   
+  expandedClientId: number | null = null;
   clientToEdit?: Client;
   clientToDelete?: Client;
   modalTitle = '';
@@ -67,6 +68,14 @@ export class ClientListComponent implements OnInit {
           this.isLoading = false;
         }
       });
+  }
+
+  toggleDetails(id: number): void {
+    if (this.expandedClientId === id) {
+      this.expandedClientId = null;
+    } else {
+      this.expandedClientId = id;
+    }
   }
 
   openModalForNew(): void {

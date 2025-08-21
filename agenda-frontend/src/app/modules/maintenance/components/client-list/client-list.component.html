@@ -29,22 +29,39 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">Telefone</th>
+                    <th scope="col" class="d-none d-md-table-cell">Telefone</th>
                     <th scope="col" class="d-none d-md-table-cell">Data de Nascimento</th>
                     <th scope="col" style="width: 150px;">Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let client of page.content">
-                    <th scope="row">{{ client.id }}</th>
-                    <td>{{ client.name }}</td>
-                    <td>{{ client.phone }}</td>
-                    <td class="d-none d-md-table-cell">{{ client.dateOfBirth | date: 'dd/MM/yyyy' }}</td>
-                    <td>
-                        <button class="btn btn-sm btn-primary me-2" (click)="openModalForEdit(client)">Editar</button>
-                        <button class="btn btn-sm btn-danger" (click)="openDeleteConfirmation(client)">Excluir</button>
-                    </td>
-                </tr>
+                <ng-container *ngFor="let client of page.content">
+                    <!-- MAIN ROW -->
+                    <tr class="text-nowrap">
+                        <th scope="row">{{ client.id }}</th>
+                        <td>{{ client.name }}</td>
+                        <td class="d-none d-md-table-cell">{{ client.phone || 'N/A' }}</td>
+                        <td class="d-none d-md-table-cell">{{ client.dateOfBirth | date: 'dd/MM/yyyy' }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-info me-2 d-md-none" type="button"
+                                (click)="toggleDetails(client.id)">
+                                <i class="bi bi-three-dots"></i>
+                            </button>
+                            <button class="btn btn-sm btn-primary me-2" (click)="openModalForEdit(client)">Editar</button>
+                            <button class="btn btn-sm btn-danger" (click)="openDeleteConfirmation(client)">Excluir</button>
+                        </td>
+                    </tr>
+                    <!-- EXPANDABLE DETAILS ROW -->
+                    <tr class="d-md-none"> 
+                        <td colspan="4" class="p-0">
+                            <div [class.show]="expandedClientId === client.id"
+                                class="collapse p-3 bg-light">
+                                <strong>Telefone:</strong> {{ client.phone || 'N/A' }} <br>
+                                <strong>Data de Nascimento:</strong> {{ client.dateOfBirth | date: 'dd/MM/yyyy' }}
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
             </tbody>
         </table>
     </div>
