@@ -6,5 +6,6 @@ public record ClientResponseDTO(
     Integer id,
     String name,
     String phone,
-    LocalDate dateOfBirth
+    LocalDate dateOfBirth,
+    String comments
 ) {}

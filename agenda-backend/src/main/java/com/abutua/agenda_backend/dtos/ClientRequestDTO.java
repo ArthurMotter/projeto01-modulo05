@@ -15,5 +15,7 @@ public record ClientRequestDTO(
 
     @NotNull(message = "A data de nascimento não pode ser nula")
     @Past(message = "A data de nascimento deve ser no passado")
-    LocalDate dateOfBirth
+    LocalDate dateOfBirth,
+
+    String comments
 ) {}

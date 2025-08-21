@@ -29,4 +29,7 @@ public class Client {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
+    @Column(columnDefinition = "TEXT")
+    private String comments;
+
 }
