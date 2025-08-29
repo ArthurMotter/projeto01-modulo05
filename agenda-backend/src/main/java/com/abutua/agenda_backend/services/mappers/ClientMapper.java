@@ -6,6 +6,7 @@ import com.abutua.agenda_backend.models.Client;
 
 public class ClientMapper {
 
+    // Record's constructor
     public static ClientResponseDTO toClientResponseDTO(Client client) {
         return new ClientResponseDTO(
             client.getId(),
